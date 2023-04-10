@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    // url      = "postgres://postgres:postgres@db:5432/POKEMON?schema=public"
+    url      = env("DATABASE_URL")
+}
+
+model Image {
+  id        String   @id @default(cuid())
+  filename  String
+  mime_type String
+  size      Int
+  createdAt DateTime @default(now())
+}
+
+model Pokemon {
+    // name, height, weight and image
+    id        String   @id @default(cuid())
+    name      String
+    height    Int
+    weight    Int
+    image     String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}

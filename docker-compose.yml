@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+  web:
+    container_name: web-container
+    build: ./frontend
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
+    networks:
+      - network-backend
+
+  api:
+    container_name: api-container
+    build: ./backend
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    networks: 
+      - network-backend
+
+# postgres db 
+  db:
+    container_name: db-container
+    image: postgres
+    restart: always
+    user: postgres
+    environment: 
+      # POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: POKEMON
+    volumes: 
+      - db:/var/lib/postgresql/data
+    networks: 
+      - network-backend
+    expose:
+      - 5432
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # ports:
+    #   - "5432:5432"
+
+
+networks:
+  network-backend: 
+    driver: bridge
+
+volumes: 
+  db:
+    driver: local
