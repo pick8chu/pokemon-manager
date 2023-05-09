@@ -19,36 +19,26 @@ services:
       - "8080:8080"
     networks: 
       - network-backend
-
-# postgres db 
+ 
   db:
     container_name: db-container
     image: postgres
     restart: always
     user: postgres
     environment: 
-      # POSTGRES_USER: postgres
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: POKEMON
+      POSTGRES_DB: pokemon
     volumes: 
-      - db:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
     networks: 
       - network-backend
     expose:
-      - 5432
-    healthcheck:
-      test: [ "CMD", "pg_isready" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    # ports:
-    #   - "5432:5432"
+      - "5432:5432"
 
 
 networks:
   network-backend: 
-    driver: bridge
 
 volumes: 
-  db:
-    driver: local
+  db-data:

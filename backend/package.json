@@ -9,33 +9,26 @@
     "scripts": {
         "test": "tap \"test/**/*.test.js\"",
         "build": "tsc -p tsconfig.json",
-        "start": "ts-node src/app.ts",
-        "dev": "ts-node-dev src/app.ts",
+        "dev": "nodemon src/app.ts",
+        "start": "node dist/app.js",
         "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@fastify/autoload": "^5.0.0",
         "@fastify/cors": "^8.2.1",
         "@fastify/sensible": "^4.1.0",
         "@fastify/static": "^6.10.0",
-        "@fastify/swagger": "^8.3.1",
         "@prisma/client": "^4.12.0",
-        "@types/bcrypt": "^5.0.0",
         "@types/node": "^18.15.11",
         "fastify": "^4.0.0",
-        "fastify-autoload": "^3.13.0",
         "fastify-cli": "^4.4.0",
-        "fastify-formbody": "^5.3.0",
-        "fastify-fs-route": "^1.1.0",
         "fastify-multer": "^2.0.3",
         "fastify-plugin": "^3.0.0",
         "prisma": "^4.12.0",
         "tap": "^16.1.0",
         "ts-node": "^10.9.1",
-        "ts-node-dev": "^2.0.0",
         "typescript": "^5.0.3"
     },
     "prisma": {
@@ -47,6 +40,7 @@
         "eslint": "^8.38.0",
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-prettier": "^4.2.1",
+        "nodemon": "^2.0.22",
         "prettier": "^2.8.7"
     }
 }

@@ -14,23 +14,25 @@ server.register(require('@fastify/static'), {
   root: path.join(__dirname, 'public/pokemon/pictures'),
   prefix: '/public/pokemon/pictures',
 });
-
 server.register(multer.contentParser);
-
-server.register(cors, {
-  origin: '*',
-  methods: ['GET', 'PUT', 'POST', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-});
-
+server.register(cors, { origin: 'localhost:3000' });
 server.register(pokemon);
 
-server.listen({ port: PORT }, (err, address) => {
-  if (err) {
-    console.error(err);
-    process.exit(1);
-  }
-  console.log(`Server listening at ${address}`);
+server.get('/', async (request, reply) => {
+  return { hello: 'world' };
 });
+
+server.listen(
+  {
+    port: PORT,
+    // by default host is localhost, so you have to explicitly set it to 0.0.0.0
+    host: '0.0.0.0',
+  },
+  (err, address) => {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    console.log(`Server listening at ${address}`);
+  },
+);
